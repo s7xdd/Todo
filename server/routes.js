@@ -33,8 +33,8 @@ router.post('/todos', async (req,res) => {
 })
 
 router.delete('/todos/:id', async (req,res) => {
+    const { id } = req.params
     await todo.findByIdAndDelete(id).then(function(){
-        const { id } = req.params
         res.status(200).json({mssg: "Deleted entry"})
     }).catch(function(err) {
         console.log(err)

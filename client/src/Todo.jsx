@@ -24,15 +24,35 @@ export default function Todo(props) {
       }
     }
 
+    const deleteTodo = async (todoId) => {
+      const res = await fetch(`http://localhost:5000/api/todos/${todoId}`, {
+        method: "DELETE"
+      })
+
+      const json = await res.json()
+      if (json){
+        setTodos(currentTodos => {
+          return currentTodos.filter((currentTodo) => (currentTodo._id !== todoId))
+        })
+      }
+
+    }
+
     return(
         <div className='todo'>
             <p>{todo.title}</p>
-            <div>
+            <div className='mutations'>
               <button 
                 className='todo__status'
                 onClick={() => updateTodo(todo._id, todo.status)}
                 >
                 {(todo.status) ? "☑" : "☐"}
+              </button>
+              <button
+              className='todo__delete'
+              onClick={() => deleteTodo(todo._id)}
+              >
+              🗑️
               </button>
             </div>
           </div>

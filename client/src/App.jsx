@@ -7,7 +7,7 @@ function App() {
 
   useEffect(() => {
     async function getTodos() {
-      const res = await fetch('http://localhost:5000/api/todos')
+      const res = await fetch('/api/todos')
       const todos = await res.json()
 
       setTodos(todos)
@@ -19,7 +19,7 @@ function App() {
 
   const createNewTodo = async (e) => {
     e.preventDefault()
-    const res = await fetch("http://localhost:5000/api/todos", {
+    const res = await fetch("/api/todos", {
       method: "POST",
       body: JSON.stringify({ 
         title: content
